@@ -4,11 +4,7 @@
   "description": "Shinhan University Startup Item Creation Task",
   "main": "index.js",
   "scripts": {
-    "start": "babel-node src/server/index.js",
-    "build": "webpack -d --mode production",
-    "client": "webpack-dev-server -d --mode development --devtool inline-source-map --hot",
-    "server": "nodemon --exec babel-node src/server/index.js",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "start": "webpack-dev-server --config ./webpack.config.js --mode development"
   },
   "repository": {
     "type": "git",
@@ -22,6 +18,9 @@
   },
   "homepage": "https://github.com/yoobni/subway-noti#readme",
   "dependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.4",
+    "babel-preset-env": "^1.6.1",
     "express": "^4.17.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
@@ -30,10 +29,9 @@
     "webpack-dev-server": "^3.1.4"
   },
   "devDependencies": {
-    "babel-core": "^6.26.3",
-    "babel-loader": "^8.1.0",
+    "@babel/core": "^7.12.3",
+    "@babel/preset-env": "^7.12.1",
     "babel-plugin-transform-class-properties": "^6.24.1",
-    "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
     "clean-webpack-plugin": "^3.0.0",
@@ -41,6 +39,14 @@
     "css-loader": "^5.0.0",
     "html-webpack-plugin": "^4.5.0",
     "nodemon": "^2.0.6",
+    "react-hot-loader": "^4.13.0",
     "style-loader": "^2.0.0"
+  },
+  "babel": {
+    "presets": [
+      "env",
+      "react",
+      "stage-2"
+    ]
   }
 }
