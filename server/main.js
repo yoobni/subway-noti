@@ -13,7 +13,6 @@ import api from './routes';
 
 const app = express();
 
-// MongoDB Connection
 const db = mongoose.connection;
 db.on('error', console.error);
 db.once('open', () => {
