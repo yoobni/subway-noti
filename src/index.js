@@ -1,19 +1,32 @@
+// React
 import React from 'react';
 import ReactDOM from 'react-dom';
+
+// Router
+import { Router, Route, browserHistory, IndexRoute } from 'react-router';
+
+// Redux
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import reducers from 'reducers';
 import thunk from 'redux-thunk';
 
+// Container Components
+import { App, Home, Login, Register, Wall } from 'containers';
+
 const store = createStore(reducers, applyMiddleware(thunk));
 
-import { Main } from 'containers';
-
+const rootElement = document.getElementById('root');
 ReactDOM.render(
     <Provider store={store}>
-        <Main />
-    </Provider>
-    , document.getElementById('root')
+        <Router history={browserHistory}>
+            <Route path="/" component={App}>
+                <IndexRoute component={Home}/>
+                <Route path="home" component={Home}/>
+                <Route path="login" component={Login}/>
+                <Route path="register" component={Register}/>
+                <Route path="wall/:username" component={Wall}/>
+            </Route>
+        </Router>
+    </Provider>, rootElement
 );
-
-module.hot.accept();

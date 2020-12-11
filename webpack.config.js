@@ -1,34 +1,32 @@
-const path = require('path');
-const webpack = require('webpack');
+var path = require('path');
 
 module.exports = {
     entry: [
-        'react-hot-loader/patch',
         './src/index.js',
+        './src/style.css'
     ],
-    module: {
-        rules: [
-            {
-                test: /\.(js|jsx)$/,
-                exclude: /node_modules/,
-                use: ['babel-loader']
-            }
-        ]
-    },
-    resolve: {
-        modules: [path.resolve(__dirname, 'src'), 'node_modules'],
-        extensions: ['*', '.js', '.jsx']
-    },
+    devtool: 'inline-source-map',
     output: {
-        path: __dirname + '/dist',
-        publicPath: '/',
+        path: __dirname + '/public/',
         filename: 'bundle.js'
     },
-    plugins: [
-        new webpack.HotModuleReplacementPlugin()
-    ],
-    devServer: {
-        contentBase: './dist',
-        hot: true
+    resolve: {
+        root: path.resolve('./src')
+    },
+    module: {
+        loaders: [
+            {
+                test: /\.js$/,
+                loaders: ['babel?' + JSON.stringify({
+                    cacheDirectory: true,
+                    presets: ['es2015', 'react']
+                })],
+                exclude: /node_modules/,
+            },
+            {
+                test: /\.css$/,
+                loader: 'style!css-loader'
+            }
+        ]
     }
 };
